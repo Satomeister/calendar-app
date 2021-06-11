@@ -1,0 +1,63 @@
+@import "../../styles/vars";
+
+.calendar {
+  width: 200px;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 0;
+
+  span {
+    font-weight: $fw-bold;
+    padding: 0 15px;
+  }
+
+  button {
+    width: 25px;
+    height: 25px;
+    border-radius: 100px;
+    color: $grey;
+
+    &:hover {
+      background: $hover-grey;
+    }
+  }
+}
+
+.cell {
+  display: inline-block;
+  width: 28px;
+  border-radius: 100px;
+  font-size: $fz-s;
+  font-weight: $fw-bold;
+  text-align: center;
+  line-height: 27px;
+  cursor: pointer;
+
+  &.disabled {
+    &:hover {
+      background: none;
+      cursor: default;
+    }
+  }
+
+  &.sameMonth {
+    color: $primary-color-light;
+  }
+
+  &.current {
+    color: $white;
+    background: $blue;
+
+    &:hover {
+      background: darken($blue, 10);
+    }
+  }
+
+  &:hover {
+    background: $hover-grey;
+  }
+}
