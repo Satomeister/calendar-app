@@ -1,0 +1,25 @@
+@import "styles/vars";
+
+.main {
+  width: 100%;
+  display: flex;
+}
+
+.sidebar {
+  padding: 0 20px;
+  & > button {
+    margin: 20px 0 15px;
+    padding: 7px 15px;
+    border: 1px solid $border-grey;
+    border-radius: 20px;
+    font-weight: $fw-sb;
+    font-size: $fz-l;
+    svg {
+      margin-left: 7px;
+      color: $blue;
+    }
+    &:hover {
+      box-shadow: 0 0 8px $border-grey ;
+    }
+  }
+}

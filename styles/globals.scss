@@ -6,6 +6,7 @@ body {
   font-family: 'Roboto', sans-serif;
   color: $primary-color;
   font-size: $fz-reg;
+  overflow: hidden;
 }
 
 *, *:before, *:after {
@@ -26,5 +27,18 @@ ul li {
 }
 
 button {
+  font-family: 'Roboto', sans-serif;
   cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $border-grey;
 }

@@ -1,7 +1,7 @@
 @import "../../styles/vars";
 
 .calendar {
-  width: 200px;
+  width: 210px;
 }
 
 .header {
@@ -11,7 +11,7 @@
   margin: 5px 0;
 
   span {
-    font-weight: $fw-bold;
+    font-weight: $fw-sb;
     padding: 0 15px;
   }
 
@@ -29,12 +29,13 @@
 
 .cell {
   display: inline-block;
-  width: 28px;
+  width: 26px;
+  margin: 2px;
   border-radius: 100px;
   font-size: $fz-s;
-  font-weight: $fw-bold;
+  font-weight: $fw-sb;
   text-align: center;
-  line-height: 27px;
+  line-height: 26px;
   cursor: pointer;
 
   &.disabled {
@@ -46,6 +47,14 @@
 
   &.sameMonth {
     color: $primary-color-light;
+  }
+
+  &.chosen {
+    background: #d2e3fc;
+    color: $blue;
+    &:hover {
+      background: darken(#d2e3fc, 5);
+    }
   }
 
   &.current {
