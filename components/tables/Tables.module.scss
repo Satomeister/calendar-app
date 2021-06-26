@@ -123,12 +123,6 @@
   z-index: 2;
 }
 
-.cell {
-  flex: 1;
-  height: 50px;
-  border-left: 1px solid $border-grey;
-}
-
 .rows::-webkit-scrollbar-thumb {
   border: none;
   -webkit-box-shadow: none;

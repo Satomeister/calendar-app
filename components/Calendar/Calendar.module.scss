@@ -4,28 +4,6 @@
   width: 210px;
 }
 
-.header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 5px 0;
-
-  span {
-    font-weight: $fw-sb;
-    padding: 0 15px;
-  }
-
-  button {
-    width: 25px;
-    height: 25px;
-    border-radius: 100px;
-    color: $grey;
-
-    &:hover {
-      background: $hover-grey;
-    }
-  }
-}
 
 .cell {
   display: inline-block;
@@ -52,6 +30,7 @@
   &.chosen {
     background: #d2e3fc;
     color: $blue;
+
     &:hover {
       background: darken(#d2e3fc, 5);
     }

@@ -1,42 +1,41 @@
-import { FC, useEffect, useState, UIEvent } from 'react';
+import React, { FC, useEffect, useState, UIEvent } from 'react';
+import { observer } from 'mobx-react-lite';
 import { addDays, addHours, startOfWeek, format, isSameDay } from 'date-fns';
-
-import styles from './Tables.module.scss';
 import classNames from 'classnames';
 
-interface Cell {
-  time: Date;
-  hour: number;
-}
+import styles from './Tables.module.scss';
+import useStore from '../../hooks/useStore';
+import Cell, { Cell as ICell } from '../Cell';
 
 interface Table {
-  rows: Cell[][];
+  rows: ICell[][];
   columns: Date[];
 }
 
-interface WeekProps {
-  date: Date
-}
+const Week: FC = () => {
+  const { calendarStore } = useStore();
 
-const Week: FC<WeekProps> = ({date}) => {
-  const [table, setTable] = useState<Table>();
+  const [table, setTable] = useState<Table>({ rows: [], columns: [] });
   const [scrolled, setScrolled] = useState<boolean>(false);
+  
 
   useEffect(() => {
     setTable({
       rows: new Array(24).fill('').map((_, hour) => {
         return new Array(7).fill('').map((_, day) => {
           return {
-            time: addHours(addDays(startOfWeek(date), day), hour),
+            time: addHours(addDays(startOfWeek(calendarStore.date), day), hour),
             hour: hour > 12 ? hour - 12 : hour,
+            tasks: [],
+            createTask: false,
           };
         });
       }),
       columns: new Array(7)
         .fill('')
-        .map((_, day) => addDays(startOfWeek(date), day)),
+        .map((_, day) => addDays(startOfWeek(calendarStore.date), day)),
     });
-  }, [date]);
+  }, [calendarStore.date]);
 
   const handleScroll = (e: UIEvent<HTMLElement>) => {
     if ((e.target as HTMLElement).scrollTop > 0) {
@@ -46,12 +45,42 @@ const Week: FC<WeekProps> = ({date}) => {
     }
   };
 
-  const handleCellClick = (cell: Cell) => {
-    console.log(cell);
-  }
+  // const handleCellClick = (e: React.MouseEvent<HTMLDivElement>, cell: Cell) => {
+  //   setTable((prev) => ({
+  //     ...prev,
+  //     rows: prev.rows.map((row) =>
+  //       row.map((c) => {
+  //         if (c.time === cell.time) {
+  //           c.createTask = true;
+  //         }
+  //         return c;
+  //       })
+  //     ),
+  //   }));
+  //
+  //   setCreateTask({
+  //     open: true,
+  //     relEl: e.target as HTMLDivElement,
+  //   });
+  // };
+
+  // const handleModalClose = () => {
+  //   setCreateTask({ open: false });
+  //   setTable((prev) => ({
+  //     ...prev,
+  //     rows: prev.rows.map((row) =>
+  //       row.map((c) => {
+  //         c.createTask = false;
+  //
+  //         return c;
+  //       })
+  //     ),
+  //   }));
+  // };
 
   return (
     <div className={styles.table}>
+    
       <div
         className={classNames(styles.row, styles.headRow, {
           [styles.scrolled]: scrolled,
@@ -69,6 +98,7 @@ const Week: FC<WeekProps> = ({date}) => {
           </div>
         ))}
       </div>
+
       <div onScroll={handleScroll} className={styles.rows}>
         {table?.rows.map((row, index) => (
           <div className={styles.row}>
@@ -80,7 +110,8 @@ const Week: FC<WeekProps> = ({date}) => {
                 : ''}
             </div>
             {row.map((cell) => (
-              <div onClick={() => handleCellClick(cell)} className={styles.cell} />
+              <Cell cell={cell}
+              />
             ))}
           </div>
         ))}
@@ -88,4 +119,4 @@ const Week: FC<WeekProps> = ({date}) => {
     </div>
   );
 };
-export default Week;
+export default observer(Week);

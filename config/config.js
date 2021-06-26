@@ -4,7 +4,7 @@ dotenv.config({
   path: 'server/.env'
 });
 
-console.log(process.env.DB_PASSWORD);
+
 
 module.exports = {
   development: {

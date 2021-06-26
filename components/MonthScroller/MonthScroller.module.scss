@@ -1,0 +1,26 @@
+@import "../../styles/vars";
+
+.scroller {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 0;
+
+  .month {
+    width: 120px;
+    text-align: center;
+    font-weight: $fw-sb;
+  }
+
+  button {
+    width: 25px;
+    height: 25px;
+    border-radius: 100px;
+    color: $grey;
+
+    &:hover {
+      background: $hover-grey;
+    }
+  }
+
+}

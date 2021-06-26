@@ -1,0 +1,15 @@
+@import "styles/vars";
+
+.cell {
+  flex: 1;
+  height: 50px;
+  border-left: 1px solid $border-grey;
+
+  .task {
+    background: #039be5;
+    height: 40px;
+    width: calc(100% - 10px);
+    border-radius: 6px;
+    text-align: center;
+  }
+}

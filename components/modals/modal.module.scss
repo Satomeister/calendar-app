@@ -1,0 +1,41 @@
+@import "../../styles/vars";
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 30px;
+  max-width: 450px;
+  width: 100%;
+  min-height: 200px;
+  border-radius: 15px;
+  background: $white;
+  box-shadow: 0 0 20px 5px rgb(0 0 0 / 14%);
+  z-index: 5;
+
+  .header {
+    height: 35px;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    background: #f1f3f4;
+    border-radius: 15px 15px 0 0;
+
+    button {
+      width: 30px;
+      height: 30px;
+      margin-right: 20px;
+      border-radius: 10px;
+
+      svg {
+        font-size: 20px;
+        color: $primary-color-light;
+        cursor: pointer;
+      }
+
+      &:hover {
+        background: lighten($hover-grey, 1);
+      }
+    }
+
+  }
+}

@@ -13,9 +13,13 @@ import {
   faChevronRight,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
+import { observer } from 'mobx-react-lite';
 
 import styles from './Calendar.module.scss';
-import classNames from 'classnames';
+
+import useStore from '../../hooks/useStore';
+import MonthScroller from '../MonthScroller';
 
 interface CalendarDay {
   date: Date;
@@ -25,19 +29,14 @@ interface CalendarDay {
   chosen: boolean;
 }
 
-interface CalendarProps {
-  onChooseDay: (date: Date) => void;
-}
-
 const dayNames = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
-const Calendar: FC<CalendarProps> = ({ onChooseDay }) => {
-  const [month, setMonth] = useState<Date>(new Date());
+const Calendar: FC = () => {
+  const { calendarStore } = useStore();
   const [calendar, setCalendar] = useState<Array<CalendarDay[]>>([]);
-  const [chosen, setChosen] = useState<Date>();
 
   useEffect(() => {
-    const firstDay = startOfWeek(startOfMonth(month));
+    const firstDay = startOfWeek(startOfMonth(calendarStore.month));
 
     let day = addDays(firstDay, -1);
 
@@ -50,41 +49,25 @@ const Calendar: FC<CalendarProps> = ({ onChooseDay }) => {
         return {
           date: d,
           day: d.getDate(),
-          isSameMonth: !isSameMonth(d, month),
+          isSameMonth: !isSameMonth(d, calendarStore.month),
           current: isSameDay(d, new Date()),
-          chosen: !!chosen && isSameDay(chosen, d),
+          chosen: !!calendarStore.date && isSameDay(calendarStore.date, d),
         };
       });
       calendar.push(days);
     }
 
     setCalendar(calendar);
-  }, [month, chosen]);
-
-  const nextMonth = () => {
-    setMonth((prev) => addMonths(prev, 1));
-  };
-
-  const prevMonth = () => {
-    setMonth((prev) => addMonths(prev, -1));
-  };
+  }, [calendarStore.month, calendarStore.date]);
 
   const handleClick = ({ date }: CalendarDay) => {
-    onChooseDay(date);
-    setChosen(date);
+    calendarStore.setDate(date);
   };
 
   return (
     <div className={styles.calendar}>
-      <div className={styles.header}>
-        <button onClick={prevMonth}>
-          <FontAwesomeIcon icon={faChevronLeft} />
-        </button>
-        <span>{format(month, 'MMMM yyyy')}</span>
-        <button onClick={nextMonth}>
-          <FontAwesomeIcon icon={faChevronRight} />
-        </button>
-      </div>
+
+      <MonthScroller />
 
       <div>
         {dayNames.map((name, i) => (
@@ -125,4 +108,4 @@ const Calendar: FC<CalendarProps> = ({ onChooseDay }) => {
   );
 };
 
-export default Calendar;
+export default observer(Calendar);

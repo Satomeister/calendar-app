@@ -2,5 +2,23 @@
 
 .header {
   height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 20px;
   border-bottom: 1px solid $border-grey;
+}
+
+.photo {
+  border-radius: 100%;
+  width: 40px;
+}
+
+.name {
+  margin-left: 10px;
+  font-size: $fz-l;
+  font-weight: $fw-sb;
+}
+
+.logout {
+  margin-left: auto;
 }

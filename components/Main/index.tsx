@@ -6,22 +6,21 @@ import styles from './Main.module.scss';
 
 import Calendar from '../Calendar';
 import Week from '../tables/Week';
-import { startOfDay } from 'date-fns';
+import Button from '../Button';
 
 const Main: FC = () => {
-
-  const [day, setDay] = useState<Date>(startOfDay(new Date()))
+  const handleCreate = () => {};
 
   return (
     <div className={styles.main}>
       <div className={styles.sidebar}>
-        <button>
+        <Button onClick={handleCreate}>
           Create
           <FontAwesomeIcon icon={faPlus} />
-        </button>
-        <Calendar onChooseDay={(day:Date) => setDay(day)}/>
+        </Button>
+        <Calendar />
       </div>
-      <Week date={day}/>
+      <Week />
     </div>
   );
 };

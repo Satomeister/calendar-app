@@ -1,0 +1,17 @@
+@import "styles/vars";
+
+.button {
+  padding: 7px 15px;
+  border: 1px solid $border-grey;
+  border-radius: 20px;
+  font-weight: $fw-sb;
+  font-size: $fz-l;
+
+  &.square {
+    border-radius: 5px;
+  }
+
+  &:hover {
+    box-shadow: 0 0 8px $border-grey;
+  }
+}

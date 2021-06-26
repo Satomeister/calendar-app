@@ -42,3 +42,17 @@ button {
 ::-webkit-scrollbar-thumb {
   background: $border-grey;
 }
+.spinner {
+  animation: 2s ease-in-out infinite spin;
+  color: $blue;
+  font-size: 30px;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
